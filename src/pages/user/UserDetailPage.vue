@@ -32,7 +32,6 @@ const currentUser = ref({})
 const avatarUrl = ref('')
 const gender = ref('')
 onMounted(async () => {
-  // TODO 更新完后获取的用户却还是老的
   currentUser.value = await getCurrentUser()
   console.log(currentUser.value)
   avatarUrl.value = currentUser.value.avatarUrl
@@ -41,6 +40,7 @@ onMounted(async () => {
   }else {
     gender.value = '女'
   }
+  sessionStorage.setItem('user',JSON.stringify(currentUser.value))
 })
 const toEdit = (editKey: string, editName: string, currentValue: string) => {
   router.push({

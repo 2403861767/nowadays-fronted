@@ -8,32 +8,33 @@
         @fab-click="toAdd"
         @change="handleChange"
     >
-      <var-bottom-navigation-item @click="toRouteIndex"  label="首页" icon="home" />
-      <var-bottom-navigation-item @click="toRouteUser" label="个人"   icon="account-circle"  />
+      <var-bottom-navigation-item name="index" @click="toRouteIndex" label="首页" icon="home"/>
+      <var-bottom-navigation-item name="user" @click="toRouteUser" label="个人" icon="account-circle"/>
       <template #fab>
-        <var-icon name="heart" />
+        <var-icon name="heart"/>
       </template>
     </var-bottom-navigation>
   </div>
 </template>
 
 <script setup lang="ts">
-import {ref} from "vue";
-import {useRouter} from "vue-router";
+import {onMounted, ref} from "vue";
+import {useRoute, useRouter} from "vue-router";
 
 const router = useRouter()
-const active = ref(0)
+const route = useRoute()
+const active = ref('')
+
 function handleChange(v) {
-  if (v === 0){
-    router.push('/index')
-  }
-  if (v === 1){
-    router.push('/user')
-  }
-  // Snackbar.info(`changed to ${v}`)
-  // console.log(active.value)
+  router.push(v)
 }
 
+const currentPath = ref('')
+onMounted(() => {
+  currentPath.value = route.path
+  const newActive = currentPath.value.replace('/', '')
+  active.value = newActive
+})
 const toAdd = () => {
   console.log('toAdd')
 }

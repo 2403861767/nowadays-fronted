@@ -2,6 +2,7 @@
   <div>
     <div><p class="title">注册</p></div>
     <van-form style="margin-top: 20px;" @submit="doRegister">
+<!--      TODO 只能上传图片-->
       <van-field name="value" label="上传头像">
         <template #input>
           <van-uploader :max-count="1" v-model="value"/>
