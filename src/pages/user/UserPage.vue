@@ -15,7 +15,7 @@
         <var-button @click="toGithub" round text color="transparent" text-color="#fff">
           <var-icon name="github" :size="24"/>
         </var-button>
-        <var-button round text color="transparent" text-color="#fff">
+        <var-button @click="Snackbar.success('功能暂未实现')" round text color="transparent" text-color="#fff">
           <var-icon name="cog-outline" :size="24"/>
         </var-button>
       </template>

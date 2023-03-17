@@ -1,7 +1,7 @@
 <template>
   <div style="background-color: #f7f8fa;height: 100vh">
     <!--    NavBar-->
-    <NavBar :titleName="titleName" :hasMenuButton="true"/>
+    <NavBar :titleName="titleName" />
 
     <div>
       <van-pull-refresh  v-model="refreshing" success-text="刷新成功" @refresh="onRefresh">
@@ -13,7 +13,7 @@
         >
           <van-swipe-cell v-for="plan in allPlans">
             <template v-if="plan.status === 0" #left>
-              <van-button square type="primary" text="完成"/>
+              <van-button @click="openFinishDialog(plan.id)" square type="primary" text="完成"/>
             </template>
             <van-cell :class="{Finished:plan.status===1}" style="margin-bottom: 5px;" :value="plan.createTime">
               <template #title>
@@ -26,7 +26,7 @@
               </template>
             </van-cell>
             <template #right>
-              <van-button square type="danger" text="删除"/>
+              <van-button @click="openDeleteDialog(plan.id)" square type="danger" text="删除"/>
             </template>
           </van-swipe-cell>
         </van-list>
@@ -35,7 +35,10 @@
       <van-back-top bottom="10vh" />
 
     </div>
-
+    <van-dialog @confirm="finishPlan" v-model:show="openFinish" title="确认完成吗" show-cancel-button>
+    </van-dialog>
+    <van-dialog @confirm="deletePlan" v-model:show="openDelete" title="确认删除吗" show-cancel-button>
+    </van-dialog>
   </div>
 
 </template>
@@ -46,7 +49,47 @@ import {useRouter} from "vue-router";
 import NavBar from "../components/NavBar.vue";
 import moment from "moment";
 import myAxios from "../plugins/myAxios";
+import {Snackbar} from "@varlet/ui";
 
+const openDelete = ref(false)
+const tempId = ref(0)
+const openDeleteDialog = (id) => {
+  openDelete.value = true
+  tempId.value = id
+}
+const deletePlan = async () => {
+  // console.log(tempId.value)
+  const res = await myAxios.get('/plan/delete',{params:{id:tempId.value}})
+  if (res.code === 0) {
+    openDelete.value =false
+    tempId.value = 0
+    refreshing.value =true
+    onRefresh()
+  }else {
+    Snackbar.error("出现错误")
+  }
+
+}
+
+
+const openFinish = ref(false)
+const openFinishDialog = (id) => {
+  openFinish.value = true
+  tempId.value = id
+}
+const finishPlan = async () => {
+  // console.log(tempId.value)
+  const res = await myAxios.get('/plan/finish',{params:{id:tempId.value}})
+  if (res.code === 0) {
+    openFinish.value =false
+    tempId.value = 0
+    refreshing.value =true
+    onRefresh()
+  }else {
+    Snackbar.error("出现错误")
+  }
+
+}
 
 const router = useRouter();
 const user = ref()
