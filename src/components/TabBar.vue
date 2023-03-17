@@ -28,7 +28,12 @@ const active = ref('')
 function handleChange(v) {
   router.push(v)
 }
-
+const toRouteIndex = () => {
+  router.push('/index')
+}
+const toRouteUser = () => {
+  router.push('/user')
+}
 const currentPath = ref('')
 onMounted(() => {
   currentPath.value = route.path
@@ -36,7 +41,7 @@ onMounted(() => {
   active.value = newActive
 })
 const toAdd = () => {
-  console.log('toAdd')
+  router.push('/plan/add')
 }
 </script>
 

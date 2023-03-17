@@ -9,10 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@vant/use": "^1.5.1",
     "@varlet/ui": "^2.8.4",
     "axios": "^1.3.4",
+    "element-plus": "^2.3.0",
     "less": "^4.1.3",
     "less-loader": "^11.1.0",
+    "moment": "^2.29.4",
     "vant": "^4.0.11",
     "vue": "^3.2.45",
     "vue-router": "4"

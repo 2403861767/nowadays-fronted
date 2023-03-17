@@ -7,11 +7,13 @@ import Vant from 'vant';
 import Varlet from '@varlet/ui'
 import '@varlet/ui/es/style'
 import 'vant/lib/index.css';
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
 
 const app = createApp(App)
 
 
-
+app.use(ElementPlus)
 app.use(Vant)
 app.use(Varlet)
 app.use(router)

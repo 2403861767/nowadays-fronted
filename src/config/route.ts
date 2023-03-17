@@ -5,6 +5,7 @@ import Index from "../pages/IndexPage.vue"
 import UserDetail from "../pages/user/UserDetailPage.vue"
 import UserEdit from "../pages/user/UserEditPage.vue"
 import BaseLayout from "../layouts/BaseLayout.vue"
+import PlanAdd from "../pages/plan/PlanAddPage.vue"
 import * as VueRouter from "vue-router";
 import {Snackbar} from "@varlet/ui";
 
@@ -20,6 +21,7 @@ const routes = [
     },
     { path: '/user/detail', component: UserDetail},
     { path: '/user/edit', component: UserEdit},
+    { path: '/plan/add', component: PlanAdd, meta: {requiresAuth:true}},
 
 ]
 const router = VueRouter.createRouter({

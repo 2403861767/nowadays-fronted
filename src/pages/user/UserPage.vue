@@ -52,7 +52,7 @@
     <div style="height: 70vh;">
       <div style="margin-top: 1rem;">
         <van-cell-group inset>
-          <van-cell title="我的VIP" value="立即升级VIP"
+          <van-cell @click="doVip" title="我的VIP" value="立即升级VIP"
                     size="large" is-link>
             <template #icon>
               <svg t="1678413104742" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -67,7 +67,7 @@
       </div>
       <div style="margin-top: 1rem;">
         <van-cell-group inset>
-          <van-cell title="联系我"
+          <van-cell @click="connectMe=true" title="联系我"
                     size="large" is-link>
             <template #icon>
               <svg style="margin-top: 2px;" t="1678410551463" class="icon" viewBox="0 0 1024 1024" version="1.1"
@@ -82,7 +82,7 @@
       </div>
       <div style="margin-top: 1rem;">
         <van-cell-group inset>
-          <van-cell title="关注微信公众号" size="large" is-link>
+          <van-cell @click="openWx=true" title="加我微信" size="large" is-link>
             <template #icon>
               <svg style="margin-top: 2px;" t="1678411035442" class="icon"
                    viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4478" width="1.3rem"
@@ -116,6 +116,16 @@
 
     <van-dialog @confirm="loginout" v-model:show="show" title="确认退出吗" show-cancel-button>
     </van-dialog>
+    <van-dialog v-model:show="connectMe" title="联系方式" >
+       <var-card
+        title="QQ:2403861767"
+        subtitle="电话:18307984130"
+        ripple
+    />
+    </van-dialog>
+    <van-dialog v-model:show="openWx" title="微信" >
+      <van-image src="https://see-leaf.oss-cn-beijing.aliyuncs.com/img/mmqrcode1678969206892.png" />
+    </van-dialog>
   </div>
 </template>
 
@@ -123,9 +133,15 @@
 import {onMounted, ref} from 'vue'
 import {useRouter} from "vue-router";
 import myAxios from "../../plugins/myAxios";
+import {Snackbar} from "@varlet/ui";
 
 const show = ref(false)
+const openWx = ref(false)
+const connectMe = ref(false)
 const router = useRouter()
+const doVip = () => {
+  Snackbar.success('功能暂未实现')
+}
 const backRoute = () => {
   router.back()
 }
